@@ -68,25 +68,29 @@ export default function Home() {
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese, bitch!</h1>
         <div>
           <Image
-            className="outline outline-4 outline-yellow-400 rounded-xl"
+            className="outline hover:outline-4 outline-yellow-400 rounded-xl"
             src="/mothomoto.jpg"
             width={600}
             height={600}
             alt="mothomoto"
           />
         </div>
-        <div>
+        <div className="flex flex-row gap-5">
           <input
             type="text"
             value={inputText}
             onChange={handleInputChange}
             className="mt-4 w-[250px]"
           />
+          <button className="mt-4 bg-red-500 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+            Clear
+          </button>
         </div>
         <p className="text-white mt-2">{transformedText}</p>
+
         <button
           onClick={copyToClipboard}
-          className="mt-4 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+          className="mt-10 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
           Copy to Clipboard
         </button>
       </div>
