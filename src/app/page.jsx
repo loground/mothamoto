@@ -86,7 +86,7 @@ export default function Home() {
             type="text"
             value={inputText}
             onChange={handleInputChange}
-            className="mt-4 w-[250px]"
+            className="mt-4 w-[500px] rounded-xl"
           />
           <button
             onClick={() => clearButton()}
@@ -94,7 +94,7 @@ export default function Home() {
             Clear
           </button>
         </div>
-        <p className="text-white mt-2">{transformedText}</p>
+        <p className="text-white mt-5 text-xl">{transformedText}</p>
 
         <button
           onClick={copyToClipboard}
