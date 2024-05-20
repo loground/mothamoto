@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 
 export default function Home() {
@@ -91,6 +92,11 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Mothamotonese</title>
+        <link rel="image_src" href="/logo.PNG" />
+        <meta property="og:image" content="/logo.PNG" />
+      </Head>
       <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese, bitch!</h1>
 
