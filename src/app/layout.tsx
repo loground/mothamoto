@@ -4,10 +4,13 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// export const metadata: Metadata = {
-//   title: 'Speak mothamotonese',
-//   description: 'learn how to speak',
-// };
+export const metadata: Metadata = {
+  title: 'Speak mothamotonese',
+  description: 'learn how to speak',
+  icons: {
+    icon: '/logo.PNG',
+  },
+};
 
 export default function RootLayout({
   children,
