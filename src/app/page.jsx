@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
@@ -70,10 +70,16 @@ export default function Home() {
     setTransformedText('');
   };
 
-  const audioRef = useRef(new Audio('/song.mp3')); // Ref to hold the audio object
-  audioRef.current.volume = 0.5;
+  const audioRef = useRef(null);
+  // Ref to hold the audio object
+  useEffect(() => {
+    // Initialize the audio object within useEffect to ensure it's client-side
+    audioRef.current = new Audio('/song.mp3');
+    audioRef.current.volume = 0.5;
+  }, []);
 
   const soundManager = () => {
+    if (!audioRef.current) return; // Additional safety check
     if (audioRef.current.paused) {
       audioRef.current.play();
       setIsPlaying(true);
