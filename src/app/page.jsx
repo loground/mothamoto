@@ -1,18 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
   // State to hold the regular input text and the transformed text
   const [inputText, setInputText] = useState('');
   const [transformedText, setTransformedText] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Function to transform the input based on specific mappings
   const transformText = (text) => {
     const mappings = {
       a: 'ä',
-      b: 'ƀ',
+      b: 'b',
       c: 'č',
       e: 'ë',
       g: 'ġ',
@@ -27,7 +28,7 @@ export default function Home() {
       y: 'ÿ',
       w: 'ŵ',
       A: 'Ä',
-      B: 'ƀ',
+      B: 'B',
       C: 'Č',
       E: 'Ë',
       G: 'Ġ',
@@ -68,13 +69,28 @@ export default function Home() {
     setInputText('');
     setTransformedText('');
   };
+
+  const audioRef = useRef(new Audio('/song.mp3')); // Ref to hold the audio object
+  audioRef.current.volume = 0.5;
+
+  const soundManager = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    } else {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
   return (
     <>
       <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese, bitch!</h1>
+
         <div>
           <Image
-            className="outline hover:outline-4 outline-yellow-400 rounded-xl"
+            className="outline hover:outline-4 outline-yellow-400 rounded-xl mt-2"
             src="/mothomoto.jpg"
             width={600}
             height={600}
@@ -96,11 +112,19 @@ export default function Home() {
         </div>
         <p className="text-white mt-5 text-xl">{transformedText}</p>
 
-        <button
-          onClick={copyToClipboard}
-          className="mt-10 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
-          Copy to Clipboard
-        </button>
+        <div className="gap-20 flex flex-row">
+          <button
+            onClick={soundManager}
+            className="mt-10 bg-white hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+            {isPlaying ? 'Stop Music' : 'Play Sound'}
+          </button>
+
+          <button
+            onClick={copyToClipboard}
+            className="mt-10 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+            Copy to Clipboard
+          </button>
+        </div>
       </div>
     </>
   );
