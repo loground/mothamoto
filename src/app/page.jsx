@@ -62,6 +62,10 @@ export default function Home() {
     });
   };
 
+  const clearButton = () => {
+    setInputText('');
+    setTransformedText('');
+  };
   return (
     <>
       <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
@@ -82,7 +86,9 @@ export default function Home() {
             onChange={handleInputChange}
             className="mt-4 w-[250px]"
           />
-          <button className="mt-4 bg-red-500 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+          <button
+            onClick={() => clearButton()}
+            className="mt-4 bg-red-500 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
             Clear
           </button>
         </div>
