@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import StickyCountdown from './Countdown.jsx';
+import MouseLiveDrawing from './Drawing.jsx';
 import Image from 'next/image';
 
 export default function Home() {
@@ -12,9 +13,18 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (window !== undefined && window.innerWidth < 768) {
-      setIsMobile(true);
-    }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set the initial state based on the current window size
+    handleResize();
+
+    // Add event listener for resizing
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove event listener
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Function to transform the input based on specific mappings
@@ -100,21 +110,23 @@ export default function Home() {
   return (
     <>
       <StickyCountdown />
-      <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
+      <div className="bg-black h-screen lg:h-full w-full flex flex-col items-center justify-center">
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese!</h1>
-
-        <div>
+        <div className="lg:flex flex-col lg:flex-row gap-5 lg:h-[500px] mt-2">
           <Image
-            className="outline hover:outline-4 outline-yellow-400 rounded-xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[600px]"
+            className="outline hover:outline-4 outline-yellow-400 rounded-xl w-full max-w-[250px] sm:max-w-sm md:max-w-md lg:max-w-[600px]"
             src="/mothomoto.jpg"
             width={600}
             height={600}
             alt="mothomoto"
           />
+          {!isMobile && <MouseLiveDrawing />}
         </div>
-        <div className="flex flex-row gap-5">
+
+        <div className="flex flex-row gap-5 mt-10">
           <input
             type="text"
+            placeholder="Translate your text here"
             value={inputText}
             onChange={handleInputChange}
             className="mt-4 w-[220px] md:w-[400px] lg:w-[500px] rounded-xl"
@@ -127,7 +139,7 @@ export default function Home() {
         </div>
         <p className="text-white mt-5 text-xl">{transformedText}</p>
 
-        <div className="gap-10 lg:gap-20 flex flex-row">
+        <div className="gap-10 lg:gap-20 m-2 flex flex-row">
           <button
             onClick={soundManager}
             className="mt-10 bg-white hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
@@ -136,7 +148,7 @@ export default function Home() {
 
           <button
             onClick={copyToClipboard}
-            className="mt-10 bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
+            className="mt-10  bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
             Copy to Clipboard
           </button>
         </div>
