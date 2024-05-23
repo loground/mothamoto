@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import StickyCountdown from './Countdown.jsx';
 import Image from 'next/image';
 
 export default function Home() {
@@ -98,12 +99,13 @@ export default function Home() {
 
   return (
     <>
+      <StickyCountdown />
       <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese!</h1>
 
         <div>
           <Image
-            className="outline hover:outline-4 outline-yellow-400 rounded-xl mt-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[600px]"
+            className="outline hover:outline-4 outline-yellow-400 rounded-xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[600px]"
             src="/mothomoto.jpg"
             width={600}
             height={600}
