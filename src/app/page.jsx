@@ -8,6 +8,13 @@ export default function Home() {
   const [inputText, setInputText] = useState('');
   const [transformedText, setTransformedText] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window !== undefined && window.innerWidth < 768) {
+      setIsMobile(true);
+    }
+  }, []);
 
   // Function to transform the input based on specific mappings
   const transformText = (text) => {
@@ -92,11 +99,11 @@ export default function Home() {
   return (
     <>
       <div className="bg-black h-screen w-full flex flex-col items-center justify-center">
-        <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese, bitch!</h1>
+        <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese!</h1>
 
         <div>
           <Image
-            className="outline hover:outline-4 outline-yellow-400 rounded-xl mt-2"
+            className="outline hover:outline-4 outline-yellow-400 rounded-xl mt-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[600px]"
             src="/mothomoto.jpg"
             width={600}
             height={600}
@@ -108,7 +115,7 @@ export default function Home() {
             type="text"
             value={inputText}
             onChange={handleInputChange}
-            className="mt-4 w-[500px] rounded-xl"
+            className="mt-4 w-[220px] md:w-[400px] lg:w-[500px] rounded-xl"
           />
           <button
             onClick={() => clearButton()}
@@ -118,7 +125,7 @@ export default function Home() {
         </div>
         <p className="text-white mt-5 text-xl">{transformedText}</p>
 
-        <div className="gap-20 flex flex-row">
+        <div className="gap-10 lg:gap-20 flex flex-row">
           <button
             onClick={soundManager}
             className="mt-10 bg-white hover:bg-yellow-300 text-black font-bold py-2 px-4 rounded">
