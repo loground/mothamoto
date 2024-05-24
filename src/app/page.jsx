@@ -109,7 +109,6 @@ export default function Home() {
 
   return (
     <>
-      <StickyCountdown />
       <div className="bg-black h-screen lg:h-full w-full flex flex-col items-center justify-center">
         <h1 className="text-yellow-400 text-4xl text-center">Speak mothamotonese!</h1>
         <div className="lg:flex flex-col lg:flex-row gap-5 lg:h-[500px] mt-2">
