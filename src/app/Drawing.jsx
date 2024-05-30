@@ -16,7 +16,7 @@ const Example = () => {
   );
 };
 
-const MAX_POINTS = 1000;
+const MAX_POINTS = 4000;
 
 const MouseMoveLineDrawing = ({ children }) => {
   const [points, setPoints] = useState([]);
